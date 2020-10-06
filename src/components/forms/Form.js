@@ -1,11 +1,22 @@
 import React from "react";
-import Form from "bulma/"
 
-default export function Form( {id,submitHandler,children} ) {
+// how do you deal with all the autocomplete, autocorrect, spellcheck, autocapitalize, etc.
+
+export default function Form( {
+    // form element id
+    id,
+    // space separated string of classes
+    classes,
+    // submit handler function
+    submitHandler = (e) => console.log(e),
+    // child components
+    children
+} ) {
     
     return(
+        // form wrapper
         <form 
-            className="form" 
+            className={"form " + classes}
             id={id}
             onSubmit={submitHandler}
         >
