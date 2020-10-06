@@ -8,14 +8,15 @@
     "@testing-library/user-event": "^7.1.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.3",
-    "semver": "^7.3.2"
+    "react-scripts": "3.4.3"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "sass": "sass --sourcemap=none ./src/css/sass/custom.scss:./src/css/styles.css",
+    "sasswatch": "sass --watch --sourcemap=none ./src/css/sass/custom.scss:./src/css/styles.css"
   },
   "eslintConfig": {
     "extends": "react-app"
