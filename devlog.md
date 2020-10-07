@@ -5,6 +5,8 @@ add form component
 add input component
 work on conditional rendering
 read up on form validation with react hooks
+    - https://upmostly.com/tutorials/using-custom-react-hooks-simplify-forms
+    - https://upmostly.com/tutorials/form-validation-using-custom-react-hooks
 set up all the bulma validation classes
 add button component
 decide how to handle optional classes

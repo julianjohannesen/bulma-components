@@ -16,9 +16,11 @@ export default function Input({
     inputOnBlur = (e)=>console.log(e.target),//_onBlur,
     // initial input value do i need it?
     inputValue = '',//values.value,
-    // input left icon, just the last bit of the fa-
+    // Is it a required field?
+    required,
+    // input left icon string, just the last bit of the fa-
     inputLeftIconClass = '',
-    // optional input right icon, just the last bit of the fa-
+    // optional input right icon string, just the last bit of the fa-
     inputRightIconClass = '',
     // optional help message string
     helpMessage = "Please complete this field."
@@ -48,6 +50,7 @@ export default function Input({
                     placeholder={inputPlaceholder}
                     value={inputValue}
                     onChange={inputOnChange}
+                    required={required==="true"?true:false}
                 />
                 {inputLeftIconClass ?
                 <span className="icon is-small is-left">
@@ -60,7 +63,7 @@ export default function Input({
                 </span>
                 : null }
             </div>
-            <p className={`help is-danger`}>{helpMessage}</p>
+            {/* <p className={`help is-danger`}>{helpMessage}</p> */}
         </div>
     );
 }
