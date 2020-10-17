@@ -25,9 +25,6 @@ export default function Input({
 
 }){
 
-    // There's a possibility to add a show/hide password feature with that little eye icon
-    // And also a "remember me" feature
-
     const icons = classnames(
         {"has-icons-left": inputLeftIconClass},
         {"has-icons-right": inputRightIconClass}
@@ -67,7 +64,7 @@ export default function Input({
                 : null }
             </div>
             {false ? 
-            <p className={`help is-danger`}>{helpMessage}</p> 
+            <p className={`help is-danger`}>later</p> 
             : null }
         </div>
     );

@@ -1,15 +1,18 @@
 10-05-20:
-install ruby and sass gem
-test compile css
-add form component
-add input component
-work on conditional rendering
-read up on form validation with react hooks
-    - https://upmostly.com/tutorials/using-custom-react-hooks-simplify-forms
-    - https://upmostly.com/tutorials/form-validation-using-custom-react-hooks
-set up all the bulma validation classes
-add button component
-decide how to handle optional classes
-decide how to handle passing in initial options
-add aria labels
-add validation
+- ~~install ruby and sass gem~~
+- ~~test compile css~~
+- ~~add form component~~
+- ~~add input component~~
+- ~~add button component~~
+- ~~add conditional rendering in input component~~
+- add validation
+    - read up on the JS validation API
+    - read up on form validation with react hooks
+        - https://upmostly.com/tutorials/using-custom-react-hooks-simplify-forms
+        - https://upmostly.com/tutorials/form-validation-using-custom-react-hooks
+    - read up on form validation with Bulma classes
+- decide how to handle passing in optional classes to form elements
+- decide how to handle passing in initial form values
+- add aria labels
+- add a show/hide password feature with that little eye icon with the password input
+- add a "remember me" feature at login

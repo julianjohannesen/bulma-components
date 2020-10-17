@@ -1,20 +1,22 @@
-/** @format */
+import React, {useState} from "react";
 
 
 // What I want: 
-// Validation for each form element as the user leaves the element. Keep the danger style until the problem is fixed. Remove the danger style when the problem is fixed. It doesn't matter whether the user leaves the element and comes back later. Or should it be impossible to move on until a problem is fixed?
-// Validation on submit
-// Use the native validation API
-// Possibly use a React hook
+// 1. Validation for each form element as the user leaves the element. Keep the Bulma danger style until the problem is fixed. Remove the danger style when the problem is fixed. It shouldn't matter whether the user leaves the element and comes back later. 
+// 2. Validation on submit
+// 3. Use the native validation API
+// 4. Use Bulma styling
+// 5. Possibly use a React hook
 
-// To do this I need to listen for the focus and blur events (or is it focusin and focusout?). On blur, validate the element. On success, do nothing. On failure, style element and show help message.
+// To do this I need to listen for the focus and blur events (or focusin and focusout). On blur, validate the element. On success, do nothing. On failure, style element and show help message.
 
-// Store validation flag
-//const [ valid, setValid ] = useState(true);
-// Do this on blur
-//function inlineValidate (e) {
-   // checkValidity() // return t/f, if f fires "invalid" event
-//}
+//Store validation flag
+const [ valid, setValid ] = useState(true);
+//Do this on blur
+const inlineValidate = (e) => {
+    //checkValidity is part of the constraint validation API. It returns true or false, based on whether the element passes rules specified inline, e.g. "require". If it returns false, it fires the "invalid" event So, listen for the "invalid" event, and if it's false, apply styles.
+    checkValidity();
+}
 
 // This is a super simple validation script that will only work on form submission. It's not designed to work as you leave a form field
 
