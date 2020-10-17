@@ -7,7 +7,7 @@ function myComponent() {
 	// State for storing mouse coordinates
 	const [coords, setCoords] = useState({ x: 0, y: 0 });
 
-	// Event handler uses useCallback so that reference never changes. He doesn't say reference to what. He must mean the handler function. (This reminds me of using event.persist() to retain reference to an event that would otherwise be pooled and reused by React.) But a good question is - is it worth it? Not if the child components aren't memoized. Otherwise, counter-intuitively, using useCallback might be more expensive than not using. 
+	// The event handler uses useCallback so that the reference to the handler function does not change from render to render. We don't want to create a new copy of the handler on every render. But a good question is - is it worth it? Not if the child components aren't memoized. Otherwise, counter-intuitively, using useCallback might be more expensive than not using it. 
 	const handler = useCallback(
         // Pass in the mouse position
 		({ clientX, clientY }) => {
@@ -30,7 +30,7 @@ function myComponent() {
 }
 
 // Hook
-// Pass in the event type, the handler for that event, and the element to which you'll attack the event
+// Pass in the event type, the handler for that event, and the element to which you'll attach the event
 export default function useEventListener(eventName, handler, element = window) {
 	// The author says that this creates a ref that stores the handler. I thought that the reference had to be to an element in the DOM. I was wrong. useRef returns a mutable ref object whose .current property is initialized to the passed argument (initialValue). The returned object will persist for the full lifetime of the component, including between renders. Yes, if you pass a ref object to React with <div ref={myRef} />, React will set its .current property to the corresponding DOM node whenever that node changes. But that's not the only way to use useRef. It's also a good way to hold on to any mutable value between renders, like here it's storing the event handler. So now the handler is being stored between renders in a couple of different ways. In the parent, the handler is defined with useCallback. Here in the child, it's stored as a ref.
 	const savedHandler = useRef();

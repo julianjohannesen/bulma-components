@@ -4,27 +4,29 @@ import classnames from "classnames";
 export default function Input({
     // optional label text
     labelText = '',
-    // name of input element, will also be uses as label html-for and id
+    // name of input element, will also be used as label html-for and id
     inputName,
     // input type, e.g. text
     inputType = "text",
     // optional placeholder text
     inputPlaceholder = '',
     // optional onChange will default to default handler
-    inputOnChange = (e)=>console.log(e.target),//_onChange,
+    inputOnChange,
     // optional blur handler will default to default blur handler
-    inputOnBlur = (e)=>console.log(e.target),//_onBlur,
+    inputOnBlur,
     // initial input value do i need it?
-    inputValue = '',//values.value,
+    value,
     // Is it a required field?
     required,
     // input left icon string, just the last bit of the fa-
     inputLeftIconClass = '',
     // optional input right icon string, just the last bit of the fa-
     inputRightIconClass = '',
-    // optional help message string
-    helpMessage = "Please complete this field."
+
 }){
+
+    // There's a possibility to add a show/hide password feature with that little eye icon
+    // And also a "remember me" feature
 
     const icons = classnames(
         {"has-icons-left": inputLeftIconClass},
@@ -48,9 +50,10 @@ export default function Input({
                     className="input"
                     type={inputType}
                     placeholder={inputPlaceholder}
-                    value={inputValue}
+                    value={value}
                     onChange={inputOnChange}
                     required={required==="true"?true:false}
+                    autoComplete="off"
                 />
                 {inputLeftIconClass ?
                 <span className="icon is-small is-left">
@@ -63,7 +66,9 @@ export default function Input({
                 </span>
                 : null }
             </div>
-            {/* <p className={`help is-danger`}>{helpMessage}</p> */}
+            {false ? 
+            <p className={`help is-danger`}>{helpMessage}</p> 
+            : null }
         </div>
     );
 }

@@ -1,66 +1,74 @@
-// Adapted from Leonardo Maldonado's hook. https://www.telerik.com/blogs/how-to-build-custom-forms-react-hooks
+/** @format */
 
-import { useState, useEffect, useRef } from "react";
+// A couple different things are mixed together - form state, form event handlers, form error handling
 
-// Pass in the initial form values and the submit handler
-const useCustomForm = ({ initialValues, onSubmit }) => {
+import React, { useState, useRef, useEffect } from "react";
 
-    // In local state, track the form input values, errors, whether something has been touched, and the blur and submit events.
-	const [values, setValues] = useState(initialValues || {});
-	const [errors, setErrors] = useState({});
-	const [touched, setTouched] = useState({});
-	const [onSubmitting, setOnSubmitting] = useState(false);
-	const [onBlur, setOnBlur] = useState(false);
+export default function useForm (initialValues, submitHandler) {
 
-	// Create a persistent flag that tells us whether the form has rendered. We can use this flag to reset the form. The very first time the form renders, this flag is true and the initial values are set. Every subsequent render, the reset step is skipped.
-	const formRenderedRef = useRef(true);
+    const [formValues, setFormValues] = useState(initialValues || {});
+    const [errors, setErrors] = useState({});
+    const [touched, setTouched] = useState({});
+    const [blurFlag, setBlurFlag] = useState(false);
+    const [submitFlag, setSubmitFlag] = useState(false);
+    //const resetFlag = useRef(true);
 
-	useEffect(() => {
-		// Test the persistent flag, then reset the form's initial values. Otherwise, skip this step.
-		if (formRenderedRef.current) {
-			setValues(initialValues);
-			setErrors({});
-			setTouched({});
-			setOnSubmitting(false);
-			setOnBlur(false);
-        }
-        // Regardless of the test above, set the persistent flag to false
-		formRenderedRef.current = false;
-        },
-        // Re-render if and only if the initial values change 
-        [initialValues]
-    );
+    //console.log("Here are the initial values and the form values", + "\n" + Object.values(initialValues) || "null", "\n" + Object.values(formValues) || "null");
 
-    // Handle the change event on input elements
-	const handleChange = (event) => {
-        // Get the target element's name and value, e.g. "fname" and "Bob"
-        const { target: {name, value} } = event;
-        // Persist the event so that it isn't returned to the pool and re-used by React. If we didn't do this, by the time the handler gets executed, there's a small chance that the event it operates on will be the wrong event.
+    // The handlers can be reinitialized and redefined on each render. You could avoid that with useCallback, but it might not be worth it if there aren't a lot of forms on the page.
+
+    // Handle input element changes
+    const handleChange = (event) => {
+        // Prevent React from recycling the event
         event.persist();
-        // Finally, overwrite the values object with its previous members, plus the new member. Should we be using (values)=>({...values, [name]:value}) here?
-		setValues({ ...values, [name]: value });
-	};
+        // Set the form values
+        setFormValues(prev => ({ ...prev, [event.target.name]: event.target.value }));
+    };
 
-	const handleBlur = (event) => {
-		const { target: {name} } = event;
-		setTouched({ ...touched, [name]: true });
-		setErrors({ ...errors });
-	};
+    // Handle input element blur. This is a hook for validation.
+    const handleBlur = (event) => {
+        // Add the element to a list of elements that have been touched
+        setTouched(prev => ({ ...prev, [event.target.name]: true }));
+        // Set any errors
+        setErrors({ ...errors });
+    };
 
-	const handleSubmit = (event) => {
-		if (event) event.preventDefault();
-		setErrors({ ...errors });
-		onSubmit({ values, errors });
-	};
+    const handleSubmit = (event) => {
+        // The conditional is unnecessary right?
+        if (event) event.preventDefault();
+        // Set any errors
+        setErrors({ ...errors });
+        // And/Or submit the form with values and errors
+        submitHandler({ formValues, errors });
+    };
 
-	return {
-		values,
-		errors,
-		touched,
-		handleChange,
-		handleBlur,
-		handleSubmit,
-	};
-};
+    //? What's the problem that has to be solved? Maybe you have to use useEffect like this in order to be able to send a request to the server that could be sent back with error messages without having the form reset. Is that even true? Is this a good way to do that? The form will only reset if the page reloads and we set the useRef again. It will not reset if the form goes through multiple renders. OR is the problem that the page does not reload, but React tries to stick the initial values back in? That problem would only come up if useForm was called more than once, right? Why would useForm be called more than once? 
 
-export default useCustomForm;
+    // useEffect(
+    //     () => {
+    //         // The reset flag is true on the first render...
+    //         if(resetFlag.current){
+    //             setFormValues(initialValues);
+    //             setErrors({});
+    //             setTouched({});
+    //             setBlurFlag(false);
+    //             setSubmitFlag(false);
+    //         }
+    //         //... and false on subsequent renders
+    //         resetFlag.current = false;
+    //     },
+    //     // Re-render if and only if the initial values change
+    //     [initialValues]
+    // );
+
+    // Export everything
+    return {
+        formValues,
+        errors,
+        touched,
+        handleChange,
+        handleBlur,
+        handleSubmit
+    }
+
+}

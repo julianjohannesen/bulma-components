@@ -26,7 +26,7 @@ export default function Button({
 
 	return (
         <div className="field">
-            <div class="control">
+            <div className="control">
             <button className={"button " + buttonClasses}>
                 {buttonLeftIconClasses ? 
                 <span className="icon">

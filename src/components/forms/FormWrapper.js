@@ -8,17 +8,19 @@ export default function Form( {
     // space separated string of classes
     classes,
     // submit handler function
-    submitHandler = (e) => console.log(e),
+    onSubmit,
     // child components
     children
 } ) {
     
     return(
         // form wrapper
+        //? Do I need to add noValidate?
         <form 
             className={"form " + classes}
             id={id}
-            onSubmit={submitHandler}
+            onSubmit={onSubmit}
+            
         >
             {children}
         </form>
