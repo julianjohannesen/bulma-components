@@ -53,9 +53,10 @@ const errorMessages = {
     lnameBad: "Please enter a valid last name.",
     emailNo: "Email address is required.",
     emailBad: "Please enter a valid email address.",
+    emailNoMatch: "Email addresses do not match."
     passwordNo: "Password is required.",
     passwordBad : "Please enter a valid password."
-    password2: "Passwords do not match."
+    passwordNoMatch: "Passwords do not match."
 
 }
 

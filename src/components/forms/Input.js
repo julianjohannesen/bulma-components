@@ -3,13 +3,13 @@ import classnames from "classnames";
 
 export default function Input({
     // optional label text
-    labelText = '',
+    labelText,
     // name of input element, will also be used as label html-for and id
     inputName,
     // input type, e.g. text
-    inputType = "text",
+    inputType,
     // optional placeholder text
-    inputPlaceholder = '',
+    inputPlaceholder,
     // optional onChange will default to default handler
     inputOnChange,
     // optional blur handler will default to default blur handler
@@ -17,11 +17,11 @@ export default function Input({
     // initial input value do i need it?
     value,
     // Is it a required field?
-    required,
+    required = "false",
     // input left icon string, just the last bit of the fa-
-    inputLeftIconClass = '',
+    inputLeftIconClass,
     // optional input right icon string, just the last bit of the fa-
-    inputRightIconClass = '',
+    inputRightIconClass,
 
 }){
 
@@ -42,15 +42,16 @@ export default function Input({
             : null }
             <div className={"control " + icons}>
                 <input
+                    autoComplete="off"
+                    className="input"
                     id={inputName}
                     name={inputName}
-                    className="input"
-                    type={inputType}
-                    placeholder={inputPlaceholder}
-                    value={value}
                     onChange={inputOnChange}
+                    onBlur={inputOnBlur}
+                    placeholder={inputPlaceholder}
                     required={required==="true"?true:false}
-                    autoComplete="off"
+                    type={inputType}
+                    value={value}
                 />
                 {inputLeftIconClass ?
                 <span className="icon is-small is-left">

@@ -6,72 +6,82 @@ import Input from "./forms/Input.js";
 import Button from "./forms/Button.js";
 import useForm from "../hooks/useForm.js";
 
-export default function Form1(props) {
+export default function Form1() {
 
-    const initialValues = {
-        fname: "",
-        lname: "",
-        email: "",
-        password: "",
-        password2: "",
-    }
+    const submitHandler = (formValues, formErrors) => {
+		if (Object.keys(formValues)) console.log(Object.values(formValues));
+	}
 
-    const submitHandler = (formValues, errors) => console.log(Object.values(formValues), Object.values(errors))
+	const { formValues, formErrors, handleChange, handleBlur, handleSubmit } = useForm(submitHandler);
 
-	const { formValues, errors, handleChange, handleBlur, handleSubmit } = useForm(initialValues, submitHandler);
-
-	console.log("Is there a formValues object?", Object.values(formValues));
+	console.log(
+		"Form1 rendered.", 
+		JSON.stringify(formValues)
+	);
 
 	return (
 		<Form
 			id="form1"
-			classes="fakeclass1 fakeclass2"
-            onSubmit={handleSubmit}
-            
+			classes=""
+            onSubmit={handleSubmit}  
 		>
 			{/*Why is this div here? */}
             <div>
+		
 				<Input
 					inputName="fname"
 					labelText="First Name"
 					inputOnChange={handleChange}
-					value={formValues.fname}
+					// Supply a default value to avoid the uncontrolled to controlled error
+					value={formValues?.fname || ''}
 				/>
 				<Input
 					inputName="lname"
 					labelText="Last Name"
 					inputOnChange={handleChange}
-					value={formValues.lname}
+					value={formValues?.lname || ''}
 				/>
 				<Input
-					inputName="email"
+					inputName="email1"
 					labelText="Email"
 					inputType="email"
 					inputLeftIconClass="envelope"
-					placeholder="example@example.com"
+					inputPlaceholder="example@example.com"
 					required="true"
 					inputOnChange={handleChange}
-					value={formValues.email}
+					value={formValues?.email1 || ''}
 				/>
 				<Input
-					name="password"
+					inputName="email2"
+					labelText="Confirm Email"
+					inputType="email"
+					inputLeftIconClass="envelope"
+					inputPlaceholder=""
+					required="true"
+					inputOnChange={handleChange}
+					value={formValues?.email2 || ''}
+				/>
+				<Input
+					name="pass1"
 					labelText="Password"
 					inputType="password"
 					inputLeftIconClass="lock"
 					required="true"
 					inputOnChange={handleChange}
-                    value={formValues.password}
-                    inputPlaceholder="*****"
+                    value={formValues?.pass1 || ''}
+                    inputPlaceholder="**********"
 				/>
 				<Input
-					name="password2"
-					labelText="Confirm Password"
-					inputType="text"
+					name="pass2"
+					labelText="Password"
+					inputType="password"
 					inputLeftIconClass="lock"
 					required="true"
 					inputOnChange={handleChange}
-					value={formValues.password2}
+                    value={formValues?.pass2 || ''}
 				/>
+				
+				
 				<Button buttonText="Submit" buttonClasses="is-large is-info" />
 			</div>
 		</Form>
