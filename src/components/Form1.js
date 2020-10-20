@@ -9,7 +9,7 @@ import useForm from "../hooks/useForm.js";
 export default function Form1() {
 
     const submitHandler = (formValues, formErrors) => {
-		if (Object.keys(formValues)) console.log(Object.values(formValues));
+		if (Object.keys(formValues).length > 0) console.log(Object.values(formValues));
 	}
 
 	const { formValues, formErrors, handleChange, handleBlur, handleSubmit } = useForm(submitHandler);
@@ -69,7 +69,7 @@ export default function Form1() {
 					required="true"
 					inputOnChange={handleChange}
                     value={formValues?.pass1 || ''}
-                    inputPlaceholder="**********"
+                    //inputPlaceholder="**********"
 				/>
 				<Input
 					name="pass2"
