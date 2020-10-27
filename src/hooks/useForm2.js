@@ -4,13 +4,12 @@ import React, { useState, useRef, useEffect } from "react";
 
 export default function useForm (submitHandler) {
 
-    // Is the purpose of initialValues to re-fill the form with the same values after submit, in the event that the server sends the form back because the form contains an error
     const [formValues, setFormValues] = useState({});
     const [formErrors, setFormErrors] = useState({});
     const [touched, setTouched] = useState({});
     const [blurFlag, setBlurFlag] = useState(false);
     const [submitFlag, setSubmitFlag] = useState(false);
-    const initializeFlag = useRef(true);
+    //const initializeFlag = useRef(true);
 
     // The handlers can be reinitialized and redefined on each render. You could avoid that with useCallback, but it might not be worth it if there aren't a lot of forms on the page.
 

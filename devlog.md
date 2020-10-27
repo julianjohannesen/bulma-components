@@ -25,3 +25,5 @@ In the useForm hook, I'm not sure what problem is that we're trying to solve tha
 - Do we have to use useEffect in order to be able to send a request to the server that could be sent back with error messages without having the form reset? Is that even true? Is this a good way to do that? The form will only reset if the page reloads and we set the useRef again. It will not reset if the form goes through multiple renders.
 
 - Is it because React retains the user's responses, even after the form has been submitted?
+
+QUESTION - If you have a bunch of constraints on a form input, does violating a constraint generate an immediate message?

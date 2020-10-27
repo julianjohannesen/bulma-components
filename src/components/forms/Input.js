@@ -1,66 +1,73 @@
 import React from "react";
 import classnames from "classnames";
 
+// Could event listeners like OnChange be imported in a more succinct way in an object and then spread
+
 export default function Input({
     // optional label text
-    labelText,
+    Label,
     // name of input element, will also be used as label html-for and id
-    inputName,
+    Name,
     // input type, e.g. text
-    inputType,
+    Type,
     // optional placeholder text
-    inputPlaceholder,
+    Placeholder,
     // optional onChange will default to default handler
-    inputOnChange,
+    OnChange,
     // optional blur handler will default to default blur handler
-    inputOnBlur,
+    OnBlur,
     // initial input value do i need it?
-    value,
+    Value,
     // Is it a required field?
-    required = "false",
+    Required = "false",
     // input left icon string, just the last bit of the fa-
-    inputLeftIconClass,
+    LeftIconClass,
     // optional input right icon string, just the last bit of the fa-
-    inputRightIconClass,
+    RightIconClass,
 
 }){
 
     const icons = classnames(
-        {"has-icons-left": inputLeftIconClass},
-        {"has-icons-right": inputRightIconClass}
+        {"has-icons-left": LeftIconClass},
+        {"has-icons-right": RightIconClass}
     );
+
+    // const [valid, setValid] = useState(true);
+    // const blurHandler = (e) => {
+    //     setValid(this.checkValidity());
+    // }
 
     return(
         <div className="field">
-            {labelText ? 
+            {Label ? 
             <label 
-                htmlFor={inputName}
+                htmlFor={Name}
                 className="label"
             >
-                {labelText}
+                {Label}
             </label>
             : null }
             <div className={"control " + icons}>
                 <input
                     autoComplete="off"
                     className="input"
-                    id={inputName}
-                    name={inputName}
-                    onChange={inputOnChange}
-                    onBlur={inputOnBlur}
-                    placeholder={inputPlaceholder}
-                    required={required==="true"?true:false}
-                    type={inputType}
-                    value={value}
+                    id={Name}
+                    name={Name}
+                    onChange={OnChange}
+                    //onBlur={blurHandler}
+                    placeholder={Placeholder}
+                    required={Required==="true"?true:false}
+                    type={Type}
+                    value={Value}
                 />
-                {inputLeftIconClass ?
+                {LeftIconClass ?
                 <span className="icon is-small is-left">
-                    <i className={`fas fa-${inputLeftIconClass}`}></i>
+                    <i className={`fas fa-${LeftIconClass}`}></i>
                 </span>
                 : null }
-                {inputRightIconClass ?
+                {RightIconClass ?
                 <span className="icon is-small is-right">
-                    <i className={`fas fa-${inputRightIconClass}`}></i>
+                    <i className={`fas fa-${RightIconClass}`}></i>
                 </span>
                 : null }
             </div>
