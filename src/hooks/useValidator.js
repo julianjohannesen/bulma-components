@@ -58,9 +58,9 @@ const initialState = {
 function validationReducer(state, action) {
 	// Depending on action type, switch cases
 	switch (action.type) {
-		// On change, create a new state object to use later
+		// On change, create a new state object with previous state (values, errors, submitted) and a new values object that contains previous form values and a new payload.
 		case "change":
-			// A new state object
+			// A new state object that uses previous form values and a new payload
 			const values = { ...state.values, ...action.payload };
 			// Return an object with the original state and the new state key:value pair
 			return {
@@ -77,7 +77,7 @@ function validationReducer(state, action) {
 				// New submitted flag
 				submitted: true,
 			};
-		// On a call to validate return a new state object and a new errors object
+		// On a call to validate return a new state object with a new errors property
 		case "validate":
 			return {
 				...state,
