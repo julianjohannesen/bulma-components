@@ -1,2 +1,2 @@
 # bulma-components
-This is a React component library build on Bulma
+This is a React component library built on Bulma

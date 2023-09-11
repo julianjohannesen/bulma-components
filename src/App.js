@@ -15,7 +15,7 @@ function App() {
 				<div className="container">
 					<div className="column is-4 is-offset-4">
 						<div className="box">
-              <Form1 />
+              				<Form1 />
 						</div>
 					</div>
 				</div>
