@@ -4,7 +4,7 @@ import React from "react";
 //import logo from './logo.svg';
 import "./App.css";
 import Form1 from "./components/Form1.js";
-import Form2 from "./components/Form2.js"
+//import Form2 from "./components/Form2.js"
 import "./css/styles.css";
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
 					<div className="column is-4 is-offset-4">
 						<div className="box">
               				<Form1 />
-							<Form2 />
+							{/* <Form2 /> */}
 						</div>
 					</div>
 				</div>
