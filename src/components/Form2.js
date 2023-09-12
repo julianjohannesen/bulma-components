@@ -1,8 +1,8 @@
 /** @format */
 
 import React from "react";
-import useForm from "./useForm";
-import validate from "./LoginFormValidationRules";
+import useForm from "../hooks/useForm.js";
+import validate from "../utils/validate.js";
 
 const Form = () => {
 	const { values, errors, handleChange, handleSubmit } = useForm(

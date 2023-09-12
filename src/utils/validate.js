@@ -10,17 +10,21 @@ import React, {useState} from "react";
 
 // To do this I need to listen for the focus and blur events (or focusin and focusout). On blur, validate the element. On success, do nothing. On failure, style element and show help message.
 
-//Store validation flag
-const [ valid, setValid ] = useState(true);
-//Do this on blur
-const inlineValidate = (e) => {
-    //checkValidity is part of the constraint validation API. It returns true or false, based on whether the element passes rules specified inline, e.g. "require". If it returns false, it fires the "invalid" event So, listen for the "invalid" event, and if it's false, apply styles.
-    checkValidity();
-}
 
 // This is a super simple validation script that will only work on form submission. It's not designed to work as you leave a form field
 
 export default function validate(values) {
+    
+    // ! Oops. validate() isn't a hook, so I can't use useState() here.
+    //Store validation flag
+    const [ valid, setValid ] = useState(true);
+    
+    //Do this on blur
+    const inlineValidate = (e) => {
+        //checkValidity is part of the constraint validation API. It returns true or false, based on whether the element passes rules specified inline, e.g. "require". If it returns false, it fires the "invalid" event. So, listen for the "invalid" event, and if it's false, apply styles.
+        checkValidity();
+    }
+
     let errors = {};
     // If no email, set errors.email this way
 	if (!values.email) {
@@ -53,25 +57,26 @@ const errorMessages = {
     lnameBad: "Please enter a valid last name.",
     emailNo: "Email address is required.",
     emailBad: "Please enter a valid email address.",
-    emailNoMatch: "Email addresses do not match."
+    emailNoMatch: "Email addresses do not match.",
     passwordNo: "Password is required.",
-    passwordBad : "Please enter a valid password."
-    passwordNoMatch: "Passwords do not match."
+    passwordBad : "Please enter a valid password.",
+    passwordNoMatch: "Passwords do not match.",
 
 }
 
-{ 
-    const helpMesage = "";
-    switch(errors[error]) {
-        case "fname":
-            helpMessage = "Please provide your full name"
-            break;
-        case "lame":
-            break;
-        case "email":
-            break;
-        case "password":
-            break;
-        case: "password2":
-            break;
-}}
+// { 
+//     const helpMesage = "";
+//     switch(errors[error]) {
+//         case "fname":
+//             helpMessage = "Please provide your full name"
+//             break;
+//         case "lame":
+//             break;
+//         case "email":
+//             break;
+//         case "password":
+//             break;
+//         case "password2":
+//             break;
+//     }
+// }
